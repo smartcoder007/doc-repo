@@ -304,6 +304,8 @@ from(uri)
    .endChoice()
   .end()
 ************************************************
+conditional checking
+.when(simple("${body.caregivers !=null"))
 
-
+***************************************************
  
