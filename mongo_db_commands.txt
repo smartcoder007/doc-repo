@@ -256,42 +256,6 @@ observation Activity last seen query:
  db.observation.find({ "observationValue" : "Yes"}).sort({"_id":-1})
  
    
-@Component
-public class PersonOrganizationAggregation implements AggregationStrategy{
-
-	private final Logger logger = Logger.getLogger(this.getClass());
-
-	@Autowired
-	private ObjectMapper objectMapper;
-
-	@Override
-	public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-		logger.info("Agent aggregate function started");
-
-		List<Map<String,Object>> agents = new ArrayList<Map<String,Object>>();
-		
-		Map<String,Object> response = new HashMap<String,Object>();
-
-		try{
-			if(oldExchange != null){
-				agents.addAll( (List<? extends Map<String, Object>>) objectMapper.readValue( oldExchange.getIn().getBody(String.class), Map.class).get("object"));
-				agents.addAll( (List<? extends Map<String, Object>>) objectMapper.readValue( newExchange.getIn().getBody(String.class), Map.class).get("object"));
-				response.put("status", "success");
-				response.put("object", agents);
-				newExchange.getIn().setBody( objectMapper.writeValueAsString( response));						
-			}				
-			
-		}
-
-		catch(Exception e){
-			logger.error("Exception encounter in Agent aggregate function : "+ Helpers.getStackTrace(e));
-			e.printStackTrace();
-		}
-		logger.info("Agent aggregate function ended");
-		return newExchange;
-	}
-
-}
 
 queries
 
