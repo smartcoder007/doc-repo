@@ -304,8 +304,63 @@ from(uri)
    .endChoice()
   .end()
 ************************************************
-conditional checking
-.when(simple("${body.caregivers !=null"))
+conditional base routing
+simple()
+
+ 
+ from("direct:homestatus-PUT")
+	.log(LoggingLevel.INFO, "direct:homestatus-PUT")
+	.doTry()
+		.process(registerRequestProcessor)
+		.process(processorUtil.transformTCUPAlert2HomeStatusUpdateRequest())
+		.log("body:"+"${body}")
+		.log("body1:"+"${body.residentId}")
+		.process(processorUtil.test())
+		.choice()
+		.when().simple("${body.residentId} != null")		
+		  .process(processorUtil.test())
+		  .process(processorUtil.convertObjtoString())
+		  .to("direct:building-homestatus-BACKEND-PUT")					
+		.process(regGenericPostDispatchProcessor)
+		.endChoice()
+		.endDoTry()
+	.doCatch(InvalidRequestException.class)
+		.process(requestHandleErrorProcessor)
+	.doCatch(InvalidDataFormatException.class)
+		.process(registerObjectHandleErrorProcessor)
+	.doCatch(HttpOperationFailedException.class)
+		.process(serverDownHandleErrorProcessor)
+	.doCatch(Exception.class)
+		.process(registerObjectGenericHandleErrorProcessor)
+	.doFinally()
+		.process(registerObjectFinallyProcessor)
+.end();
+		
+		
+		
+/**
+	 * test processor 
+	 * @return
+	 */
+public Processor convertObjtoString() {
+return new Processor() {			
+	@Override
+	public void process(Exchange exchange) throws Exception {
+		try {							
+			HomeStatusUpdateRequest body = exchange.getIn().getBody(HomeStatusUpdateRequest.class);
+			logger.info("conver1:" +body);
+
+			exchange.getOut().setBody(objectMapper.writeValueAsString(body));	
+			logger.info("conver2:" +exchange.getOut().getBody());
+		} catch (Exception ex) {
+			logger.error("Exception encounter : " + Helpers.getStackTrace(ex));
+			throw new ESBException(	MessageConstant.ERROR_MESSAGE_2);
+		}
+
+	}
+
+};
+}
 
 ***************************************************
  
