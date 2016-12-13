@@ -254,6 +254,46 @@ Example explained:
 								});
 						});
 	6) Create Your Own Service
+	
+20) AngularJs Events
+    You can add AngularJS event listeners to your HTML elements by using one or more of these directives
+	ng-blur,ng-change,ng-click,ng-copy,ng-cut,ng-dblclick,ng-focus,ng-keydown,ng-keypress,ng-keyup,
+	ng-mousedown,ng-mouseenter,ng-mouseleave,ng-mousemove,ng-mouseover,ng-mouseup,ng-paste
+	eg: <button ng-click="count = count + 1">Click me!</button>
+
+21) AngularJS Forms:
+    Forms in AngularJS provides data-binding and validation of input controls.
+	checkbox,radiobuttons,selectbox,checkbox
+	eg:
+	<div ng-app="myApp" ng-controller="formCtrl">
+	  <form novalidate>
+		First Name:<br>
+		<input type="text" ng-model="user.firstName"><br>
+		Last Name:<br>
+		<input type="text" ng-model="user.lastName">
+		<br><br>
+		<button ng-click="reset()">RESET</button>
+	  </form>
+	  <p>form = {{user}}</p>
+	  <p>master = {{master}}</p>
+	</div>
+
+	<script>
+	var app = angular.module('myApp', []);
+	app.controller('formCtrl', function($scope) {
+		$scope.master = {firstName: "John", lastName: "Doe"};
+		$scope.reset = function() {
+			$scope.user = angular.copy($scope.master);
+		};
+		$scope.reset();
+	});
+	</script>
+	
+23) Form Validation:
+	AngularJS offers client-side form validation.
+	Required, email,
+	eg: <input name="myInput" ng-model="myInput" required>
+
 
 
 			
