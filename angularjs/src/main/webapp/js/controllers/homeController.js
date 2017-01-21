@@ -4,7 +4,8 @@
 function HomeController($scope, homeservice) {
 	$scope.homeDetails = [];
 	homeservice.getHomeDetails(function(response) {
-		$scope.homeDetails = response.data.object;
+		console.log('controller res' + response)
+		$scope.homeDetails = response.RestResponse.result;
 	});
 
 }

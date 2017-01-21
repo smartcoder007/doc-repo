@@ -2,17 +2,15 @@
  * Home Service
  */
 
-function HomeService($http) {
-	//var homeDetails = [];
-	this.getHomeDetails = function(callback) {
-
-		$http.get("http://184.72.34.109/DataHub/building").then(
-				function(response) {
-					console.log('response:' + response.data);					
-				//	this.homeDetails = response.data.object;
-					callback(response);
-				});
-	};
+function HomeService(R) {
+	
+	this.getHomeDetails=function(callback){ 		
+	    R.countryCodes.get(function(response){    
+	    	console.log('response:' + response.data);
+            callback(response);
+        });
+   };
+   
 };
 
-angular.module('homeCareApp').service('homeservice', [ '$http', HomeService ]);
+angular.module('homeCareApp').service('homeservice', ['resourceservice',HomeService]);
