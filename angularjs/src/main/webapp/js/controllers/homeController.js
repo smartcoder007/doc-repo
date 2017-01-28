@@ -2,6 +2,7 @@
  * Home controller
  */
 function HomeController($scope, homeservice) {
+	console.log("HomeController");
 	$scope.homeDetails = [];
 	homeservice.getHomeDetails(function(response) {
 		console.log('controller res' + response)

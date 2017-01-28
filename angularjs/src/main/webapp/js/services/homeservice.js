@@ -3,7 +3,7 @@
  */
 
 function HomeService(R) {
-	
+	console.log("homeservice");
 	this.getHomeDetails=function(callback){ 		
 	    R.countryCodes.get(function(response){    
 	    	console.log('response:' + response.data);
