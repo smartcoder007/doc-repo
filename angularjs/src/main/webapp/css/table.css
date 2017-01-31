@@ -6,7 +6,7 @@ table, th , td  {
   border-style: groove;
 }
 table th {
-  background-color: #4CAF50;  
+  background-color:#d9edf7;  
    text-align:left;
 }
 table tr:nth-child(odd) {

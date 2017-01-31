@@ -10,6 +10,10 @@ app.config([ '$routeProvider', '$locationProvider',
 				templateUrl : 'view/SearchByName.html',
 				controller : 'searchbynamectl',
 				controllerAs : 'searchbynamectl'
+			}).when('/HomeInfoDetails', {
+				templateUrl : 'view/HomeInfoDetails.html',
+				controller : 'HomeInfoCtrl',
+				controllerAs : 'HomeInfoCtrl'
 			}).otherwise({
 				redirectTo : 'HomeDetails'
 			});

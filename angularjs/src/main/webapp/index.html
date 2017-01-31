@@ -5,22 +5,20 @@
 <link rel="stylesheet" type="text/css" href="css/table.css" />
 </head>
 <body>
+
 	<!-- Add your site or application content here -->
 	<!-- <div ng-view=""></div> -->
 
 	<div ng-app="homeCareApp" class="container">
-		<div class="row">
-		     <nav class="navbar navbar-default">
-			<div class="col-md-3 sidebar">
-				<div class="collapse navbar-collapse">
-					<a href="#/HomeDetails" class="nav navbar-nav"> <i class="fa fa-home fa-lg"></i> HomeDetails
-					</a> <a href="#/SearchByName" class="nav navbar-nav"> <i class="fa fa-user fa-lg"></i> SearchByName
-					
-					</a>
-				</div>
+		<div class="panel with-nav-tabs panel-info">
+		   <div class="panel-heading">
+				<ul class="nav nav-tabs">
+					<li><a data-toggle="tab" href="#/HomeDetails">HomeDetails</a></li>
+					<li><a data-toggle="tab" href="#/SearchByName">SearchByName</a></li>
+					<li><a data-toggle="tab" href="#/HomeInfoDetails">HomeInfoDetails</a></li>
+				</ul>
 			</div>
-			</nav>
-			<div class="col-md-9 col-md-offset-3">
+			<div class="panel-body">
 				<div ng-view></div>
 			</div>
 		</div>
@@ -38,9 +36,11 @@
 	<script src="js/services/homeservice.js"></script>
 	<script src="js/services/searchbynameservice.js"></script>
 	<script src="js/services/resourceservice.js"></script>
+	<script src="js/services/homeinfoservice.js"></script>
 
 	<!-- controller script files -->
 	<script src="js/controllers/homeController.js"></script>
 	<script src="js/controllers/searchbynamecontroller.js"></script>
+	<script src="js/controllers/homeInfoController.js"></script>
 </body>
 </html>
