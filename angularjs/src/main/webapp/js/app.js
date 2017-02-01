@@ -14,6 +14,10 @@ app.config([ '$routeProvider', '$locationProvider',
 				templateUrl : 'view/HomeInfoDetails.html',
 				controller : 'HomeInfoCtrl',
 				controllerAs : 'HomeInfoCtrl'
+			}).when('/HomeNew', {
+				templateUrl : 'view/HomeNew.html',
+				controller : 'HomeInfoCtrl',
+				controllerAs : 'HomeInfoCtrl'
 			}).otherwise({
 				redirectTo : 'HomeDetails'
 			});

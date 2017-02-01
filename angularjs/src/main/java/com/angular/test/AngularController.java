@@ -23,7 +23,8 @@ public class AngularController {
 	 * POST method
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(@RequestBody String object) {
+	public String create(@RequestBody Home object) {
+		System.out.println(object.toString());
 		String result = "{\"id\":\"H050\",\"buildingType\":\"HOUSE\",\"occupiedStatus\":\"occupied\",\"residentList\":[{\"residentId\":\"R050\",\"residentName\":\"Lee Norma Heather \",\"residentContactNumber\":null}],\"activeState\":\"true\",\"address\":{\"unitNo\":\"#10-153\",\"block\":\"Blk 31\",\"street\":\"Marine Crescent\",\"city\":null,\"country\":\"Singapore\",\"postalCode\":\"440031\"},\"objectList\":[{\"objectId\":\"S223\",\"name\":\"H050_Bath_Room_50\"},{\"objectId\":\"S224\",\"name\":\"H050_Bed_Room_50\"},{\"objectId\":\"S225\",\"name\":\"H050_Door_Contact_50\"},{\"objectId\":\"S226\",\"name\":\"H050_Kitchen_50\"},{\"objectId\":\"S227\",\"name\":\"H050_Living_Room_50\"},{\"objectId\":\"S263\",\"name\":\"H050_Toilet_50\"},{\"objectId\":\"S286\",\"name\":\"H050_Spare_Room_50\"}],\"alertRuleList\":[{\"alertRuleId\":\"L001\",\"alertRuleName\":\"Inactivity - 1h\",\"alertRuleAssociationId\":\"LA142\",\"templateSource\":2}],\"alertEnableStatus\":\"true\",\"remarks\":null,\"caregivers\":[{\"id\":\"U002\",\"name\":\"GL1\"},{\"id\":\"U003\",\"name\":\"GL2\"}],\"activityLastSeen\":\"31-01-2017 10:18:07\",\"createdBy\":\"U001\",\"createdOn\":\"01/07/2016 10:05:43\",\"updatedBy\":\"U001\",\"updatedOn\":\"31-01-2017 14:04:56\"}";
 		return result;
 	}
@@ -41,7 +42,7 @@ public class AngularController {
 	 * PUT method
 	 */
 	@RequestMapping(method = RequestMethod.PUT)
-	public String updateAlertRule(@RequestBody String object) {
+	public String updateAlertRule(@RequestBody Home object) {
 		String result = "{\"id\":\"H050\",\"buildingType\":\"HOUSE\",\"occupiedStatus\":\"occupied\",\"residentList\":[{\"residentId\":\"R050\",\"residentName\":\"Lee Norma Heather \",\"residentContactNumber\":null}],\"activeState\":\"true\",\"address\":{\"unitNo\":\"#10-153\",\"block\":\"Blk 31\",\"street\":\"Marine Crescent\",\"city\":null,\"country\":\"Singapore\",\"postalCode\":\"440031\"},\"objectList\":[{\"objectId\":\"S223\",\"name\":\"H050_Bath_Room_50\"},{\"objectId\":\"S224\",\"name\":\"H050_Bed_Room_50\"},{\"objectId\":\"S225\",\"name\":\"H050_Door_Contact_50\"},{\"objectId\":\"S226\",\"name\":\"H050_Kitchen_50\"},{\"objectId\":\"S227\",\"name\":\"H050_Living_Room_50\"},{\"objectId\":\"S263\",\"name\":\"H050_Toilet_50\"},{\"objectId\":\"S286\",\"name\":\"H050_Spare_Room_50\"}],\"alertRuleList\":[{\"alertRuleId\":\"L001\",\"alertRuleName\":\"Inactivity - 1h\",\"alertRuleAssociationId\":\"LA142\",\"templateSource\":2}],\"alertEnableStatus\":\"true\",\"remarks\":null,\"caregivers\":[{\"id\":\"U002\",\"name\":\"GL1\"},{\"id\":\"U003\",\"name\":\"GL2\"}],\"activityLastSeen\":\"31-01-2017 10:18:07\",\"createdBy\":\"U001\",\"createdOn\":\"01/07/2016 10:05:43\",\"updatedBy\":\"U001\",\"updatedOn\":\"31-01-2017 14:04:56\"}";
 		return result;
 	}

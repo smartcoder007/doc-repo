@@ -6,11 +6,19 @@ function HomeInfoService(R) {
 	console.log("homeinfoservice");
 	this.getHomeDetails=function(callback){ 		
 	    R.getHomeInfo.get(function(response){    
-	    	console.log('response:' + response.data);
+	    	console.log('response:' + response);
             callback(response);
         });
    };
    
+  this.savehomeList=function(newHome, callback){ 		
+	    R.getHomeInfo.save(newHome, function(response){    
+	    	console.log('response:' + response);
+            callback(response);
+        });
+   }; 
+   
+  
 };
 
 angular.module('homeCareApp').service('homeinfoservice', ['resourceservice',HomeInfoService]);
