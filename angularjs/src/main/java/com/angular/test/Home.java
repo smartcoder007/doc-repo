@@ -1,6 +1,7 @@
 package com.angular.test;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
@@ -14,6 +15,8 @@ public class Home implements Serializable {
 	private String occupiedStatus;
 	private String activeState;
 	private Address address;
+	private List<Resident> residentList;	
+	private List<Caregiver> caregivers;
 	
 	
 	public String getId() {
@@ -46,12 +49,28 @@ public class Home implements Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+	
+	public List<Resident> getResidentList() {
+		return residentList;
+	}
+	public void setResidentList(List<Resident> residentList) {
+		this.residentList = residentList;
+	}
+	public List<Caregiver> getCaregivers() {
+		return caregivers;
+	}
+	public void setCaregivers(List<Caregiver> caregivers) {
+		this.caregivers = caregivers;
+	}
+	
 	@Override
 	public String toString() {
 		return "Home [id=" + id + ", buildingType=" + buildingType
 				+ ", occupiedStatus=" + occupiedStatus + ", activeState="
-				+ activeState + ", address=" + address + "]";
+				+ activeState + ", address=" + address + ", residentList="
+				+ residentList + ", caregivers=" + caregivers + "]";
 	}
+	
 	
 	
 
