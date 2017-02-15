@@ -6,7 +6,7 @@ function HomeInfoService(R) {
 	console.log("homeinfoservice");
 	this.getHomeDetails=function(callback){ 		
 	    R.getHomeInfo.get(function(response){    
-	    	console.log('response:' + response);
+	    	console.log('response:' + JSON.stringify(response));
             callback(response);
         });
    };
@@ -18,6 +18,21 @@ function HomeInfoService(R) {
         });
    }; 
    
+  this.updateHome=function(homedetails, callback){
+	   R.updateHomeInfo.update(homedetails, function(response){
+		   console.log('update response:' + response);
+		   callback(response);
+	   });
+   };
+   
+  this.deleteHome=function(param,callback){	    
+		R.deleteHome.delete(param,function(response){
+               callback(response);
+			});
+  };
+   
+   
+
   
 };
 
