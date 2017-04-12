@@ -1,0 +1,33 @@
+Version : 4.x
+
+@SpringBootApplication :
+			Spring Boot auto-configuration attempts to automatically configure your Spring application based on the jar dependencies that you have added. For example, If HSQLDB is on your classpath, and you have not manually configured any database connection beans, then we will auto-configure an in-memory database.You need to opt-in to auto-configuration by adding the @EnableAutoConfiguration or @SpringBootApplication annotations to one of your @Configuration classes.
+			
+@Bean :@Bean is a method-level annotation and a direct analog of the XML <bean/> element			
+
+
+//The @EnableWebSecurity annotation and WebSecurityConfigurerAdapter work together to provide web based security
+@SpringBootConfiguration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{ }
+
+
+
+
+// Registers the DelegatingFilterProxy to use the springSecurityFilterChain before any other registered Filter.
+public class SecurityInitializer extends AbstractSecurityWebApplicationInitializer{}
+
+
+
+
+
+// A handy opinionated WebApplicationInitializer for applications that starts a Spring Boot application and lets it 
+// bind to the servlet and filter mappings
+@SpringBootApplication
+@SpringBootConfiguration
+@EnableAutoConfiguration(exclude = { })
+@EnableTransactionManagement
+public class AppConfig extends SpringBootServletInitializer {}
+
+			
+
