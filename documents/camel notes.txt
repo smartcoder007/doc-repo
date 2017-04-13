@@ -1,0 +1,366 @@
+1) CamelContext :  Wich is a container for Components, Routes etc, it represent camel runtime system.
+CamelContext context = new DefaultCamelContext();
+context.add(route)
+context.start()
+context.stop()
+
+2)Endpoint :
+3)components: EndpointFactory would have been more appropriate because a Component is a factory for creating Endpoint instances.
+ eg: component .to("file://test");
+
+
+4)processor: process the messages
+   a)ChoiceProcessor : implements the message router pattern, that is, it
+uses a cascading if-then-else statement to route a message from an input queue to one of
+several output queues. 
+    b)FilterProcessor :class which discards
+messages that do not satisfy a stated predicate (that is, condition).
+
+
+5)Exchange: Interface for exchanging messages (contain in,out, fault messages)
+
+6) Route : A route is the step-by-step movement of a Message from an input queue, through arbitrary
+types of decision making (such as filters and routers) to a destination queue (if any).
+
+7) Expression:
+8) predicate :
+
+9) ProducerTemplate template = context.createProducerTemplate();
+      It client to send msg to routes
+
+10)Buzz words
+
+Ref: https://github.com/vrto/apache-camel-invoices/blob/master/src/main/java/com/vrtoonjava/routes/InvoicesRouteBuilder.java
+***********************************************************************************
+filter()
+
+from("seda:singleInvoicesChannel")
+                .filter(new LowEnoughAmountPredicate())
+                .to("seda:filteredInvoicesChannel");
+				
+ public class LowEnoughAmountPredicate implements Predicate {
+ 
+  public static final int LOW_ENOUGH_THRESHOLD = 10_000;
+  
+    @Override
+    public boolean matches(Exchange exchange) {
+        Invoice invoice = exchange.getIn().getBody(Invoice.class);
+        boolean lowEnough = invoice.getDollars().intValue() < LOW_ENOUGH_THRESHOLD;
+        System.out.println("Amount of $" + invoice.getDollars()
+                + (lowEnough ? " can" : " can not") + " be automatically processed by system");
+
+        return lowEnough;
+    }
+
+}
+************************************************************************************			
+				
+split()				
+from("seda:newInvoicesChannel")
+                .log(LoggingLevel.INFO, "Invoices processing STARTED")
+                .split(body())
+                .to("seda:singleInvoicesChannel");
+				
+from("activemq:my.queue").split(xPathBuilder).parallelProcessing().to("activemq:my.parts");				
+				
+************************************************************************************		
+simple()				
+from("seda:filteredInvoicesChannel")
+                .choice()
+                    .when().simple("${body.isForeign}")
+                        .to("seda:foreignInvoicesChannel")
+                    .otherwise()
+                        .to("seda:localInvoicesChannel");
+************************************************************************************						
+transform()						
+from("seda:foreignInvoicesChannel")
+                .transform().method("foreignPaymentCreator", "createPayment")
+                .to("seda:bankingChannel");		
+
+@Component
+public class ForeignPaymentCreator implements PaymentCreator {
+
+    // hard coded account value for demo purposes
+    private static final String CURRENT_IBAN_ACC = "current-iban-acc";
+
+    @Override
+    public Payment createPayment(Invoice invoice) throws PaymentException {
+        if (null == invoice.getIban()) {
+            throw new PaymentException("IBAN mustn't be null when creating foreign payment!");
+        }
+
+        return new Payment(CURRENT_IBAN_ACC, invoice.getIban(), invoice.getDollars());
+    }
+
+}
+				
+
+************************************************************************************				
+errorHandler()
+from("seda:bankingChannel")
+                .errorHandler(deadLetterChannel("log:failedPayments"))
+                .bean(PaymentProcessor.class, "processPayment");				
+				
+***************************************************************************************				
+bean(): Bean binding
+
+
+from("seda:bankingChannel")
+                .errorHandler(deadLetterChannel("log:failedPayments"))
+                .bean(PaymentProcessor.class, "processPayment");	
+				
+.bean(OrderService.class, "doSomething(${body}, ${header.high})")				
+
+
+
+parameter binding :
+public class Foo {
+public void doSomething(@Header("JMSCorrelationID") String correlationID, @Body
+String body) {
+// process the inbound message here
+}
+}
+
+public class Bar {
+public String doSomething(String body) {
+// process the in body and return whatever you want
+return "Bye World";
+}
+
+public class Bar {
+public void doSomething(Exchange exchange) {
+// process the exchange
+exchange.getIn().setBody("Bye World");
+}	
+
+public class Bar {
+// defualt this method being chooose 
+@Handler    
+public String doSomething(String body) {
+// process the in body and return whatever you want
+return "Bye World";
+}
+Par			
+
+@Component
+public class PaymentProcessor {
+
+    @Autowired
+    BankingService bankingService;
+
+    public void processPayment(Payment payment) throws PaymentException {
+        bankingService.pay(payment);
+    }
+
+}
+
+*********************************************************************************
+beanRef :which will then look up in the Registry and find the bean and invoke the given bean name.
+
+from(uri).beanRef("myBean", "methodName");
+
+***********************************************************************************
+Bean langauage:
+
+
+.setHeader(FileComponent.HEADER_FILE_NAME,
+BeanLanguage.bean(FilenameGenerator.class, "generateFilename"))
+TUTORIALS 175
+
+
+****************************************************************************
+resource:scheme:location", 
+
+eg to refer to a file on the classpath you can do:
+.setHeader("myHeader").jxpath("resource:classpath:myjxpath.txt")
+
+
+*************************************************************************
+wireTap()
+
+
+
+        //TODO: use cache instead of direct fetch
+        // when the user calls a report service for an account and date
+        from("direct:reportRequest").
+                to("log:com.camel?level=DEBUG").
+                wireTap("jms:queue:audit").
+                // must be in async thread and continue on exception
+                inOnly("seda:mail").
+                to("direct:fetch");
+************************************************************************************
+multicast()
+
+ExecutorService executor = Executors.newFixedThreadPool(16);
+        // fetch data into cache
+        from("direct:fetch").
+            multicast().stopOnException().parallelProcessing().executorService(executor).
+                aggregationStrategy(new CollectAggregationStrategy()).
+                to("bean:lotFetcher", "bean:forwardFetcher", "bean:transactionFetcher");
+				
+				
+				
+public class CollectAggregationStrategy implements AggregationStrategy {
+
+    @Override
+    public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
+
+        Object newBody = newExchange.getIn().getBody();
+
+        ArrayList list = null;
+
+        if (oldExchange == null) {
+            list = new ArrayList<Object>();
+            list.add(newBody);
+            newExchange.getIn().setBody(list);
+            return newExchange;
+        } else {
+            list = oldExchange.getIn().getBody(ArrayList.class);
+            list.add(newBody);
+            return oldExchange;
+        }
+    }
+}				
+************************************************************************************
+
+CamelTemplate (CamelCleint) :
+
+
+**************************************************************************************
+from()
+filter(): condition based routing 
+isEqualTo():
+choice():
+when():   content-based routing
+otherwise():
+to():
+
+public void configure() {
+from("queue:a").filter(header("foo").isEqualTo("bar")).to("queue:b");
+from("queue:c").choice()
+.when(header("foo").isEqualTo("bar")).to("queue:d")
+.when(header("foo").isEqualTo("cheese")).to("queue:e")
+.otherwise().to("queue:f");
+}
+*******************************************************************************************
+
+
+
+******************************************************************************************				
+11) Enterprise Integration pattern
+ 11.1) pipes and filter:
+<route>
+ <from uri="jms:queue:order"/>
+	<pipeline>
+	<bean ref="validateOrder"/>
+	<bean ref="registerOrder"/>
+	<bean ref="sendConfirmEmail"/>
+	</pipeline>
+</route>
+
+
+11.2) multicast :
+<route>
+<from uri="jms:queue:order"/>
+<multicast>
+<to uri="log:org.company.log.Category"/>
+<pipeline>
+<bean ref="validateOrder"/>
+<bean ref="registerOrder"/>
+<bean ref="sendConfirmEmail"/>
+</pipeline>
+</multicast>
+</route>
+
+*********************************************************************************************
+choice
+when
+endChoice
+end
+
+choice
+when
+endChoice
+end
+*****************************************************************
+choice
+when
+endchoice
+when
+endchoice
+end
+
+from(uri)
+ .bean(class, method)  // do any processing
+ .choice()
+   .when(header("result").isEqualTo("A")
+	  .to(routeA)
+   .endChoice()
+   .when(header("result").isEqualTo("B")
+	  .to(routeB)
+   .endChoice()
+   .when(header("result").isEqualTo("C")
+	  .to(route)
+   .endChoice()
+  .end()
+************************************************
+conditional base routing
+simple()
+
+ 
+ from("direct:homestatus-PUT")
+	.log(LoggingLevel.INFO, "direct:homestatus-PUT")
+	.doTry()
+		.process(registerRequestProcessor)
+		.process(processorUtil.transformTCUPAlert2HomeStatusUpdateRequest())
+		.log("body:"+"${body}")
+		.log("body1:"+"${body.residentId}")
+		.process(processorUtil.test())
+		.choice()
+		.when().simple("${body.residentId} != null")		
+		  .process(processorUtil.test())
+		  .process(processorUtil.convertObjtoString())
+		  .to("direct:building-homestatus-BACKEND-PUT")					
+		.process(regGenericPostDispatchProcessor)
+		.endChoice()
+		.endDoTry()
+	.doCatch(InvalidRequestException.class)
+		.process(requestHandleErrorProcessor)
+	.doCatch(InvalidDataFormatException.class)
+		.process(registerObjectHandleErrorProcessor)
+	.doCatch(HttpOperationFailedException.class)
+		.process(serverDownHandleErrorProcessor)
+	.doCatch(Exception.class)
+		.process(registerObjectGenericHandleErrorProcessor)
+	.doFinally()
+		.process(registerObjectFinallyProcessor)
+.end();
+		
+		
+		
+/**
+	 * test processor 
+	 * @return
+	 */
+public Processor convertObjtoString() {
+return new Processor() {			
+	@Override
+	public void process(Exchange exchange) throws Exception {
+		try {							
+			HomeStatusUpdateRequest body = exchange.getIn().getBody(HomeStatusUpdateRequest.class);
+			logger.info("conver1:" +body);
+
+			exchange.getOut().setBody(objectMapper.writeValueAsString(body));	
+			logger.info("conver2:" +exchange.getOut().getBody());
+		} catch (Exception ex) {
+			logger.error("Exception encounter : " + Helpers.getStackTrace(ex));
+			throw new ESBException(	MessageConstant.ERROR_MESSAGE_2);
+		}
+
+	}
+
+};
+}
+
+***************************************************
+ 
