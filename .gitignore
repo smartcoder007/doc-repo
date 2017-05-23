@@ -1,3 +1,5 @@
 /expressjs/node_modules
 
 /nodejs/node_modules
+/springaop/.settings/*.prefs
+/angularjs2/.settings
