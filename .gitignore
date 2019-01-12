@@ -3,3 +3,7 @@
 /nodejs/node_modules
 /springaop/.settings/*.prefs
 /angularjs2/.settings
+/sparksamples/*.cache-main
+/sparksamples/*.cache-tests
+/sparksamples/*.gitignore
+/sparksamples/.settings/*.prefs
