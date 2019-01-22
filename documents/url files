@@ -1,3 +1,6 @@
 1)https://github.com/kieras/camel-ecommerce/blob/master/src/main/java/arkhi/camel/ecommerce/routes/ProcessaItemAgregaPedidoRouteBuilder.java
 2) Aws lambda using postgres ref : http://awslambda27.blogspot.com/2017/01/aws-lambda-rds-connection-using-java.html
 3) Aws s3 to upload file using AWS SDK for Java :https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpJava.html
+4) How to Use AWS Lambda function in Java to communicate with AWS S3? :https://blog.webnersolutions.com/use-aws-lambda-function
+
+
