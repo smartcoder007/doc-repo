@@ -1,1 +1,11 @@
-https://github.com/kieras/camel-ecommerce/blob/master/src/main/java/arkhi/camel/ecommerce/routes/ProcessaItemAgregaPedidoRouteBuilder.java
+1)https://github.com/kieras/camel-ecommerce/blob/master/src/main/java/arkhi/camel/ecommerce/routes/ProcessaItemAgregaPedidoRouteBuilder.java
+2) Aws lambda using postgres ref : http://awslambda27.blogspot.com/2017/01/aws-lambda-rds-connection-using-java.html
+3) Aws s3 to upload file using AWS SDK for Java :https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpJava.html
+4) How to Use AWS Lambda function in Java to communicate with AWS S3? :https://blog.webnersolutions.com/use-aws-lambda-function
+5) Shows how to use a Lambda function to store data in an RDS instance: https://github.com/arun-gupta/lambda-rds-mysql
+6) Debug AWS Lambda locally using intellij and docker container : https://www.youtube.com/watch?v=Pk6XWPbLUYQA
+7) AWS API Integrate with  Lambda (db call) : https://www.youtube.com/watch?v=zSOGyHSsSH4
+8) AWS Lambda test case : https://github.com/mohamedadly/AWS-Lambda-S3-Event-Handler/blob/master/src/net/fbd/s3eventhandler/LambdaFunctionHandler.java
+
+
+
