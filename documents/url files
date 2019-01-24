@@ -5,6 +5,7 @@
 5) Shows how to use a Lambda function to store data in an RDS instance: https://github.com/arun-gupta/lambda-rds-mysql
 6) Debug AWS Lambda locally using intellij and docker container : https://www.youtube.com/watch?v=Pk6XWPbLUYQA
 7) AWS API Integrate with  Lambda (db call) : https://www.youtube.com/watch?v=zSOGyHSsSH4
+8) AWS Lambda test case : https://github.com/mohamedadly/AWS-Lambda-S3-Event-Handler/blob/master/src/net/fbd/s3eventhandler/LambdaFunctionHandler.java
 
 
 
