@@ -6,6 +6,8 @@
 6) Debug AWS Lambda locally using intellij and docker container : https://www.youtube.com/watch?v=Pk6XWPbLUYQA
 7) AWS API Integrate with  Lambda (db call) : https://www.youtube.com/watch?v=zSOGyHSsSH4
 8) AWS Lambda test case : https://github.com/mohamedadly/AWS-Lambda-S3-Event-Handler/blob/master/src/net/fbd/s3eventhandler/LambdaFunctionHandler.java
+9) S3EventNotification parsing : https://www.programcreek.com/java-api-examples/index.php?api=com.amazonaws.services.s3.event.S3EventNotification
+
 
 
 
