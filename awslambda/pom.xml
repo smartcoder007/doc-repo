@@ -46,7 +46,15 @@
 			<artifactId>aws-java-sdk-s3</artifactId>
 			<version>1.11.485</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sqs</artifactId>
+			<version>1.11.485</version>
+		</dependency>
+		
+		
+		
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

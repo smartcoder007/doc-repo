@@ -11,27 +11,26 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.event.S3EventNotification.S3EventNotificationRecord;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ProcessSQSEvents implements RequestHandler<Object, String> {
+public class ProcessSQSEvents implements RequestHandler<SQSEvent, String> {
 
-	public String handleRequest(Object event, Context context) {
+	public String handleRequest(SQSEvent  event, Context context) {
 		LambdaLogger logger = context.getLogger();
 		try {
-			if (event == null) {
-				logger.log("No event receieved.................. ");
-				return "No data found";
-			}  else if (event instanceof LinkedHashMap) {			
-				uploadFileIntoS3(((LinkedHashMap) event),logger);
-			} else {
-				logger.log("Received event: " + event.getClass());
-				logger.log("Received event: " + event.toString());
-				return "success";
-			}
+			String key1 =System.getenv("key1");
+			String key2 = System.getenv("key2");
+			logger.log("instance type :" + event.getClass());
+			logger.log("key1: "+key1 + " , "+"key2 :"+ key2);
+			logger.log("SqsEvent : " + event.getRecords().get(0).getBody());
+			//logger.log("key : " + event.getRecords().get(0).getS3().getObject().getKey());
+			
+			SQSClient.sendMessage();
 		} catch (Exception e) {
 			logger.log("Exception details : " + e.getMessage() );
 			e.printStackTrace();
@@ -77,7 +76,7 @@ public class ProcessSQSEvents implements RequestHandler<Object, String> {
 		AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
 		
 		// STEP3: Uploading to S3 target bucket
-		s3Client.putObject(TARGET_BUCKET, dstKey, getJonsObject(event));
+		s3Clienthttp://marketplace.eclipse.org/marketplace-client-intro?mpc_install=907AKIAIJK4WTRTTBYFJ3BA.putObject(TARGET_BUCKET, dstKey, getJonsObject(event));
 		logger.log("Successfully processed " + srcBucket + "/" + srcKey + " and uploaded to " + TARGET_BUCKET
 				+ "/" + dstKey);
 
