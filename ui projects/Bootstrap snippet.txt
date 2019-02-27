@@ -1,0 +1,17 @@
+1) <meta name="viewport" content="width=device-width, initial-scale=1">
+      To ensure proper rendering and touch zooming, add the following <meta> tag inside the <head> element:
+2)  Grid basic
+let Bootstrap automatically handle the layout
+<div class="row">
+  <div class="col"></div>
+  <div class="col"></div>
+  <div class="col"></div>
+</div>
+
+3) <div class="container">  
+
+4)  Boot strap css classes reference : https://www.w3schools.com/bootstrap/bootstrap_ref_all_classes.asp
+
+    
+
+    
