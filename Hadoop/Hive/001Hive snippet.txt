@@ -1,0 +1,7 @@
+Hive config path:
+
+>cd /etc/hive/config
+>ls -ltr
+>view hive-site.xml
+>mysql -u hive -p
+Enter Password:
