@@ -17,5 +17,10 @@ Reference: https://www.npmjs.com/
    >nodemon index.js
    
    
+ 5)  download dependency from exiting npm project
+     project path>npm install
+	 
+   
+   
  
   
