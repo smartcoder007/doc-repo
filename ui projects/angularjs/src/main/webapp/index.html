@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/table.css" />
+</head>
+<body>
+
+	<!-- Add your site or application content here -->
+	<!-- <div ng-view=""></div> -->
+
+	<div ng-app="homeCareApp" class="container">
+		<div class="panel with-nav-tabs panel-info">
+		   <div class="panel-heading">
+				<ul class="nav nav-tabs">
+					<li><a data-toggle="tab" href="#/HomeDetails">HomeDetails</a></li>
+					<li><a data-toggle="tab" href="#/SearchByName">SearchByName</a></li>
+					<li><a data-toggle="tab" href="#/HomeInfoDetails">HomeInfoDetails</a></li>
+					<li><a data-toggle="tab" href="#/HomeNew">HomeNew</a></li>
+					<li><a data-toggle="tab" href="#/HomeUpdate">HomeUpdate</a></li>
+				</ul>
+			</div>
+			<div class="panel-body">
+				<div ng-view></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Script files -->
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.js"></script>
+	<script src="js/app.js"></script>
+
+	<!-- service script files -->
+	<script src="js/services/homeservice.js"></script>
+	<script src="js/services/searchbynameservice.js"></script>
+	<script src="js/services/resourceservice.js"></script>
+	<script src="js/services/homeinfoservice.js"></script>
+
+	<!-- controller script files -->
+	<script src="js/controllers/homeController.js"></script>
+	<script src="js/controllers/searchbynamecontroller.js"></script>
+	<script src="js/controllers/homeInfoController.js"></script>
+</body>
+</html>

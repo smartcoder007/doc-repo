@@ -1,0 +1,83 @@
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Basic Information</h3>
+	</div>
+
+	<div class="panel-body">
+		<form name="myForm" role="form" class="form-horizontal">Address:
+			<table style="width: 100%;" class="table-home" colspan="3">
+				<tr class="row table-home">
+					<td class="table-home">Unit:</td>
+					<td class="table-home">Block:</td>
+					<td class="table-home">Street:</td>
+				</tr>
+				<tr class="row">
+					<td><input type="text" name="Unit"
+						class="form-input-name form-control"
+						ng-model="homeUpdate.address.unitNo" required> <span
+						ng-show="!myForm.Unit.$pristine && myForm.Unit.$invalid"
+						class="required">required</span></td>
+					<td><input type="text" class="form-input-name form-control"
+						ng-model="homeUpdate.address.block" name="block" required><span
+						ng-show="!myForm.block.$pristine && myForm.block.$invalid"
+						class="required">required</span></td>
+					<td><input type="text" name="street"
+						class="form-input-name form-control"
+						ng-model="homeUpdate.address.street" required> <span
+						ng-show="!myForm.street.$pristine && myForm.street.$invalid"
+						class="required">required</span></td>
+				</tr>
+
+				<tr class="row">
+					<td class="table-home">City:</td>
+					<td class="table-home">Country:</td>
+					<td class="table-home">Postal Code:</td>
+				</tr>
+				<tr class="row">
+					<td><input type="text" name="city"
+						class="form-input-name form-control"
+						ng-model="homeUpdate.address.city" required> <span
+						ng-show="!myForm.city.$pristine && myForm.street.$invalid"
+						class="required">required</span></td>
+					<td><input type="text" name="country"
+						class="form-input-name form-control"
+						ng-model="homeUpdate.address.country" required> <span
+						ng-show="!myForm.country.$pristine && myForm.street.$invalid"
+						class="required">required</span></td>
+					<td><input type="text" name="postal"
+						class="form-input-name form-control"
+						ng-model="homeUpdate.address.postalCode" required> <span
+						ng-show="!myForm.postal.$pristine && myForm.street.$invalid"
+						class="required">required</span></td>
+				</tr>
+			</table>
+
+
+			<br /> Residents: </br>
+			</br> <select class="formcontrol dropdown-multiple" ng-model="Rsdts" style="width: 350px;">
+
+
+				<option value="{{Rst.residentId}}" selected="selected">{{Rst.residentName
+					+ (Rst.residentContactNumber == null ? ' ' : '(' +
+					(Rst.residentContactNumber + ' ') + ')')}}</option>
+
+				<option ng-repeat="x in resTable" value="{{x.id}}">{{(x.residentName.firstName?x.residentName.firstName:'
+					')+(x.residentName.middleName?x.residentName.middleName:'
+					')+(x.residentName.lastName?x.residentName.lastName:' ') +
+					(x.contactNo == null ? ' ' : '(' + (x.contactNo + ' ') + ')') }}</option>
+
+
+			</select> </br>
+			</br> Caregivers: <select ng-model="agents"
+				ng-options="a.userGroupId as (a.name==null?a.userGroupName:a.name.firstName) + (a.contact == null ? ' ' : '(' + (a.contact + ' ') + ')') for a in UserGroup"
+				class="form-control dropdown-multiple"
+				style="height: 100px !important; width: 350px;" multiple></select><br>
+			<br> Sensors:<input type="text" readonly value="" class="home-input readonly"><br>
+			<br>
+
+			<button ng-disabled="user.permissionList.indexOf('CAN_EDIT_HOMES') === -1"	class="btn ui-component-btn-info" type="button" ng-click="updateHome();">Save</button>
+			<button ng-disabled="user.permissionList.indexOf('CAN_EDIT_HOMES') === -1" class="btn ui-component-btn-info" type="button" 	ng-click="deleteHome();">Delete</button>
+		</form>
+	</div>
+</div>

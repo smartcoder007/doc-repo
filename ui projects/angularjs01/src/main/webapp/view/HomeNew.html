@@ -1,0 +1,104 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">New Home</h3>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" name="form">
+
+			<!--Start Block 1 -->
+			<div class="col-sm-12">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label for="inputName" class="col-sm-6 control-label size-15"><span class="mandatory"> *</span>Unit:</label>
+						<div class="col-sm-6">
+							<input name="Unit" id="Unit" type="text" class="form-control form-input-name " ng-model="home.address.unitNo" required /> 
+							<span ng-show="form.Unit.$touched && form.Unit.$invalid" class="required">Required</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<label for="inputName" class="col-sm-6 control-label size-15"><span class="mandatory"> *</span>Block:</label>
+						<div class="col-sm-6">
+							<input name="Block" id="Block" type="text" class="form-control form-input-name" value="" ng-model="home.address.block" required /> 
+							<span ng-show="form.Block.$touched && form.Block.$error.required" class="required">Required</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<label for="inputName" class="col-sm-6 control-label size-15"><span class="mandatory"> *</span>Street:</label>
+						<div class="col-sm-6">
+							<input name="Street" id="Street" type="text" class="form-control form-input-name" value="" ng-model="home.address.street" required /> 
+							<span ng-show="form.Street.$touched && form.Street.$error.required" class="required">Required</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--End Block 1 -->
+
+
+			<!--Start Block 2 -->
+			<div class="col-sm-12">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label for="inputName" class="col-sm-6 control-label size-15"> <span class="mandatory"> *</span>City:</label>
+						<div class="col-sm-6">
+							<input name="City" id="City" type="text" class="form-control form-input-name " value="" ng-model="home.address.city" required /> 
+							<span ng-show="form.City.$touched && form.City.$error.required" class="required">Required</span>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<label for="inputName" class="col-sm-6 control-label size-15"><span class="mandatory"> *</span>Country:</label>
+						<div class="col-sm-6">
+							<input name="Country" id="Country" type="text" class="form-control form-input-name" value="" ng-model="home.address.country" required /> 
+							<span ng-show="form.Country.$touched && form.Country.$error.required" class="required">Required</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<label for="inputName" class="col-sm-6 control-label size-15"><span class="mandatory"> *</span>Postal Code:</label>
+						<div class="col-sm-6">
+							<input name="Postal" id="Postal" type="text" class="form-control form-input-name" value="" ng-model="home.address.postalCode" required />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label for="inputUsername" class="col-sm-4 control-label">Residents:</label>
+						<div class="col-sm-6">
+							<select class="formcontrol dropdown-multiple"
+								ng-model="selectedRsdts"
+								ng-options="x.id as (x.residentName.firstName?x.residentName.firstName:' ')+(x.residentName.middleName?x.residentName.middleName:' ')+(x.residentName.lastName?x.residentName.lastName:' ') + (x.contactNo == null ? ' ' : '(' + (x.contactNo + ' ') + ')') for x in resTable">							
+							</select>
+						</div>
+					</div>
+
+					<div class="col-sm-6">
+						<label for="inputContactNumbersPreselected"
+							class="col-sm-5 control-label">Caregivers:</label>
+						<div class="col-sm-6">
+							<select ng-model="homeagents"
+								ng-options="(a.name.firstName==null?a.userGroupName:a.name.firstName)+ ( a.contact == null ? ' ' : '(' + (a.contact + ' ') + ')') for a in UserGroup"
+								class="form-control dropdown-multiple" style="height: 60px !important" multiple="multiple">
+							</select>
+						</div>
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+						<label for="inputUsername" class="col-sm-4 control-label">Sensors:</label>
+						<div class="col-sm-6">
+							<input id="" type="text" class="form-control" value="" style="width: 198px; height: 27px;" readonly />
+						</div>
+					</div>
+
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5 col-sm-2 col-m-offset-5 col-m-2 ">
+						<button class="btn ui-component-btn-info" type="button" style="" ng-click="addNewHome();" ng-disabled="form.$invalid" data-dismiss="modal">Submit</button>
+					</div>
+				</div>
+			</div>
+			
+			<!-- End of block 2 -->
+		</form>
+	</div>
+</div>

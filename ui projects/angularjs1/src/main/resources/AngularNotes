@@ -1,0 +1,374 @@
+                            Angular snippet
+1)AngularJS extends HTML with new attributes.
+
+2)AngularJS is perfect for Single Page Applications (SPAs).    
+ 
+3)directives, expressions, filters, modules, and controllers,Events, DOM, Forms, Input, Validation, Http 
+         
+4)AngularJS Extends HTML
+	AngularJS extends HTML with ng-directives.
+	The ng-app directive defines an AngularJS application.
+	The ng-model directive binds the value of HTML controls (input, select, textarea) to application data.
+	The ng-bind directive binds application data to the HTML view.              
+
+Example explained:
+
+	AngularJS starts automatically when the web page has loaded.
+	The ng-app directive tells AngularJS that the <div> element is the "owner" of an AngularJS application.
+	The ng-model directive binds the value of the input field to the application variable name.
+	The ng-bind directive binds the innerHTML of the <p> element to the application variable name.
+
+
+5) AngularJS Directives:
+    AngularJS directives are HTML attributes with an ng prefix
+    AngularJS has a set of built-in directives which offers functionality to your applications.
+    The ng-app directive also tells AngularJS that the <div> element is the "owner" of the AngularJS application
+	AngularJS also lets you define your own directives.
+
+    
+    
+   1) ng-app : 
+		directive initializes an AngularJS application.
+		The ng-app directive defines the root element of an AngularJS application.
+		The ng-app directive will auto-bootstrap (automatically initialize) the application when a web page is loaded.
+				
+   2) ng-init:  directive defines initial values for an AngularJS application.
+   3) ng-model: 
+   		1) directive binds the value of the input field to the application variable name.
+   		2) The binding goes both ways.
+   		3) validates user input for application data (number, email, required).
+   		eg:
+		 <form ng-app="" name="myForm">
+		    Email:
+		    <input type="email" name="myAddress" ng-model="text">
+		    <span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
+		</form>
+		4)Provide status for application data (invalid, dirty, touched, error).
+		5)Provide CSS classes for HTML elements.
+		6)Bind HTML elements to HTML forms.
+   		
+   4) ng-bind : directive binds the innerHTML of the <p> element to the application variable name.
+   5) ng-controller:
+   		AngularJS controllers control the data of AngularJS applications.
+		AngularJS controllers are regular JavaScript function   		
+   6) ng-repeat:
+   		Repeating HTML Elements
+   		<div ng-app="" ng-init="names=['Jani','Hege','Kai']">
+  			<ul>
+		    <li ng-repeat="x in names">
+		      {{ x }}
+		    </li>
+		  </ul>
+		</div>
+    7)ng-show:
+    8)ng-click: Call the function
+    	eg:
+    	<div ng-app="myApp" ng-controller="myCtrl">
+		    <h1 ng-click="changeName()">{{firstname}}</h1>
+		</div>
+		
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope) {
+			    $scope.firstname = "John";
+			    $scope.changeName = function() {
+			        $scope.firstname = "Nelly";
+			    }
+			});
+		</script>
+	9) ng-option:If you want to create a dropdown list, based on an object or an array in AngularJS
+    
+    
+    
+6) AngularJS Expressions:
+   AngularJS expressions are written inside double braces: {{ expression }}
+   AngularJS expressions can also be written inside a directive: ng-bind="expression"
+   AngularJS expressions bind AngularJS data to HTML the same way as the ng-bind directive
+   
+   eg:
+   		<div ng-app="" ng-init="quantity=1;cost=5">
+			<p>Total in dollar: {{ quantity * cost }}</p>
+		</div>
+
+   		
+   
+ 7)AngularJS Applications:
+	AngularJS modules define AngularJS applications.
+	AngularJS controllers control AngularJS applications.
+	The ng-app directive defines the application, the ng-controller directive defines the controller. 
+	
+	eg:
+		<div ng-app="myApp" ng-controller="myCtrl">
+			First Name: <input type="text" ng-model="firstName"><br>
+			Last Name: <input type="text" ng-model="lastName"><br>
+			<br>
+			Full Name: {{firstName + " " + lastName}}		
+		</div>
+		
+		
+8) AngularJS Module :
+	AngularJS modules define applications
+	The module is a container for the different parts of an application.
+	The module is a container for the application controllers.
+	Controllers always belong to a module.
+	
+           <script>
+				var app = angular.module('myApp', []);
+				app.controller('myCtrl', function($scope) {
+				    $scope.firstName= "John";
+				    $scope.lastName= "Doe";
+				});
+			</script>
+	The [] parameter in the module definition can be used to define dependent modules.		
+	Without the [] parameter, you are not creating a new module, but retrieving an existing one.
+
+			
+9) AngularJS Controller :AngularJS controllers control applications
+
+10) AngularJS Objects : AngularJS objects are like JavaScript objects:
+
+		<div ng-app="" ng-init="person={firstName:'John',lastName:'Doe'}">
+			<p>The name is {{ person.lastName }}</p>
+		</div>
+		
+11) AngularJS Arrays:AngularJS arrays are like JavaScript arrays
+
+			<div ng-app="" ng-init="points=[1,15,19,2,40]">
+				<p>The third result is {{ points[2] }}</p>
+				<p>The third result is <span ng-bind="points[2]"></span></p>
+			</div>
+			
+12) Create custom directive
+	<div ng-app="myApp" w3-test-directive></div>	
+	<script> 
+		var app = angular.module("myApp", []);
+		
+		app.directive("w3TestDirective", function() {
+		    return {
+		        template : "I was made in a directive constructor!"
+		    };
+		});
+	</script>
+
+13) Angular js workflow
+      1) html-> module -> controller
+  
+14)  Functions can Pollute the Global Namespace
+      AngularJS modules reduces this problem, by keeping all functions local to the module.
+      
+15) When to Load the Library
+     It is recommended that you load the AngularJS library either in the <head> or at the start of the <body>.
+	 This is because calls to angular.module can only be compiled after the library has been loaded.
+	 
+16)AngularJS Data Binding:
+	Data binding in AngularJS is the synchronization between the model and the view.
+	1)Data Model: AngularJS applications usually have a data model. The data model is a collection of data available for the application.
+	2)HTML View:The HTML container where the AngularJS application is displayed, is called the view.
+		The view has access to the model, and there are several ways of displaying model data in the view.
+	3)ng-model directive to bind data from the model to the view on HTML controls
+17)AngularJS Scope:
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<h1>{{carname}}</h1>
+		</div>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope) {
+				$scope.carname = "Volvo";
+			});
+		</script>
+	1)The scope is the binding part between the HTML (view) and the JavaScript (controller)
+	2)The scope is available for both the view and the controller.
+	3)How to Use the Scope?
+		When you make a controller in AngularJS, you pass the $scope object as an argument.
+		When adding properties to the $scope object in the controller, the view (HTML) gets access to these properties.
+		In the view, you do not use the prefix $scope, you just refer to a propertyname, like {{carname}}.
+		
+18) AngularJS Filters:
+	Filters can be added in AngularJS to format data.
+	can write custom filters
+	Filters can be added to expressions by using the pipe character |, followed by a filter
+	eg:
+	<div ng-app="myApp" ng-controller="personCtrl">
+		<p>The name is {{ lastName | uppercase }}</p>
+	</div>
+	
+	Adding Filters to Directives: The orderBy filter sorts an array
+	eg:
+	<div ng-app="myApp" ng-controller="namesCtrl">
+	<ul>
+	  <li ng-repeat="x in names | orderBy:'country'">
+		{{ x.name + ', ' + x.country }}
+	  </li>
+	</ul>
+	</div>
+	
+19) AngularJS Services
+	1)In AngularJS, a service is a function, or object, that is available for, and limited to, your AngularJS application
+	2) The $http Service:
+		The service makes a request to the server, and lets your application handle the response.
+		Several methods : .delete(),.get(), .head(), .jsonp(), .patch(),.post(),.put()
+	eg:
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope, $http) {
+			$http({
+				method : "GET",
+				url : "welcome.htm"
+			}).then(function mySucces(response) {
+				$scope.myWelcome = response.data;
+			}, function myError(response) {
+				$scope.myWelcome = response.statusText;
+			});
+		});
+	</script>
+	
+	3) The example above executes the $http service with an object as an argument. 
+	The object is specifying the HTTP method, the url, what to do on success, and what to do on failure.
+	4)The response from the server is an object with these properties:
+
+		.config the object used to generate the request.
+		.data a string, or an object, carrying the response from the server.
+		.headers a function to use to get header information.
+		.status a number defining the HTTP status.
+		.statusText a string defining the HTTP status.
+	eg:
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope, $http) {
+					$http.get("welcome.htm")
+					.then(function(response) {
+						$scope.content = response.data;
+						$scope.statuscode = response.status;
+						$scope.statustext = response.statustext; 
+							});
+						});
+	5)To handle errors, add one more functions to the .then method:
+					var app = angular.module('myApp', []);
+					app.controller('myCtrl', function($scope, $http) {
+								$http.get("wrongfilename.htm")
+								.then(function(response) {
+									//First function handles success
+									$scope.content = response.data;
+								}, function(response) {
+									//Second function handles error
+									$scope.content = "Something went wrong";
+								});
+						});
+	6) Create Your Own Service
+	
+20) AngularJs Events
+    You can add AngularJS event listeners to your HTML elements by using one or more of these directives
+	ng-blur,ng-change,ng-click,ng-copy,ng-cut,ng-dblclick,ng-focus,ng-keydown,ng-keypress,ng-keyup,
+	ng-mousedown,ng-mouseenter,ng-mouseleave,ng-mousemove,ng-mouseover,ng-mouseup,ng-paste
+	eg: <button ng-click="count = count + 1">Click me!</button>
+
+21) AngularJS Forms:
+    Forms in AngularJS provides data-binding and validation of input controls.
+	checkbox,radiobuttons,selectbox,checkbox
+	eg:
+	<div ng-app="myApp" ng-controller="formCtrl">
+	  <form novalidate>
+		First Name:<br>
+		<input type="text" ng-model="user.firstName"><br>
+		Last Name:<br>
+		<input type="text" ng-model="user.lastName">
+		<br><br>
+		<button ng-click="reset()">RESET</button>
+	  </form>
+	  <p>form = {{user}}</p>
+	  <p>master = {{master}}</p>
+	</div>
+
+	<script>
+	var app = angular.module('myApp', []);
+	app.controller('formCtrl', function($scope) {
+		$scope.master = {firstName: "John", lastName: "Doe"};
+		$scope.reset = function() {
+			$scope.user = angular.copy($scope.master);
+		};
+		$scope.reset();
+	});
+	</script>
+	
+23) Form Validation:
+	AngularJS offers client-side form validation.
+	Required, email,
+	eg: <input name="myInput" ng-model="myInput" required>
+    can create custom validation
+
+24) AngularJS Global API
+	The AngularJS Global API is a set of global JavaScript functions for performing common tasks like:
+
+	Comparing objects
+	Iterating objects
+	Converting data
+25) AngularJS Includes
+    you can include HTML content using the ng-include directive.
+	EG: <div ng-include="'myFile.htm'"></div>
+	
+	
+26) AngularJS Routing
+	The ngRoute module helps your application to become a Single Page Application.
+	The ngRoute module routes your application to different pages without reloading the entire application.
+	eg:
+	Navigate to "red.htm", "green.htm", and "blue.htm":
+	
+	<body ng-app="myApp">
+		<p><a href="#/">Main</a></p>
+		<a href="#red">Red</a>
+		<a href="#green">Green</a>
+		<a href="#blue">Blue</a>
+		<div ng-view></div>
+		<script>
+			var app = angular.module("myApp", ["ngRoute"]);
+			app.config(function($routeProvider) {
+				$routeProvider
+				.when("/", {
+					templateUrl : "main.htm"
+				})
+				.when("/red", {
+					templateUrl : "red.htm"
+				})
+				.when("/green", {
+					templateUrl : "green.htm"
+				})
+				.when("/blue", {
+					templateUrl : "blue.htm"
+				});
+			});
+		</script>
+	</body>
+	
+	eg:
+	
+	<script>
+		var app = angular.module("myApp", ["ngRoute"]);
+		app.config(function($routeProvider) {
+			$routeProvider
+			.when("/", {
+				templateUrl : "main.htm",
+			})
+			.when("/london", {
+				templateUrl : "london.htm",
+				controller : "londonCtrl"
+			})
+			.when("/paris", {
+				templateUrl : "paris.htm",
+				controller : "parisCtrl"
+			});
+		});
+		app.controller("londonCtrl", function ($scope) {
+			$scope.msg = "I love London";
+		});
+		app.controller("parisCtrl", function ($scope) {
+			$scope.msg = "I love Paris";
+		});
+	</script>
+
+
+
+
+
+
+			
+
+                            
