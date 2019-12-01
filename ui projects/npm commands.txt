@@ -19,6 +19,9 @@ Reference: https://www.npmjs.com/
    
  5)  download dependency from exiting npm project
      project path>npm install
+     
+ 6) Star the server
+      >npm start
 	 
    
    
