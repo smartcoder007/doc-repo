@@ -1,4 +1,4 @@
-package jdk8;
+package streams;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,10 +8,10 @@ public class StreamFilters {
 	
 	public static void main(String[] args) {
 
-        List<String> lines = Arrays.asList("spring", "node", "mkyong");
+        List<String> lines = Arrays.asList("spring", "node", "jarvis");
 
         List<String> result = lines.stream()                // convert list to stream
-                .filter(test -> !"mkyong".equals(test))     // we dont like mkyong
+                .filter(test -> !"jarvis".equals(test))     // we dont like jarvis
                 .collect(Collectors.toList());              // collect the output and convert streams to a List
 
         result.forEach(System.out::println);                //output : spring, node
