@@ -1,4 +1,4 @@
-package com.kareem.spark
+package com.spark.concepts
 
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD.rddToPairRDDFunctions

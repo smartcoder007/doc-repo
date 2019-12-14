@@ -1,4 +1,4 @@
-package com.kareem.spartk;
+package com.kareem.spark;
 
 public class Test {
 
