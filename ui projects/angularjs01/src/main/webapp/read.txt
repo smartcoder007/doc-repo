@@ -1,4 +1,0 @@
-
-
-Ref url:
-1) http://learnwebtutorials.com/simple-example-of-ng-view-in-angularjs
