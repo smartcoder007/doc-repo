@@ -1,0 +1,70 @@
+0)kubectl help
+kubectl -h
+1) display all things which are running
+kubectl get all
+kubectl get all --help
+kubectl get all -o wide 
+kubectl get all --all-namespaces -o wide 
+
+e.g.
+po/pod-name     
+svc/service-name
+deploy/deployment-name
+
+2) get nodes
+kubectl get nodes
+
+3) get pods
+kubectl get pods
+kubectl get pod
+
+4) kubectl cluster-info
+
+5) kubectl get events
+
+6) kubectl get services
+
+7) delete pod 
+  kubectl delete pod pod-name
+  delete all service under deployemnt
+  kubectl delete deployment deployment-name
+8) create pod
+ kubectl create -f mypod.yml
+ 
+9) create deployment
+
+kubectl create deployment nginx-server --image=nginx
+
+10) get replicaset info
+
+ kubectl get replicaset
+ 
+11) get describe
+kubectl describe deployment deployment-name
+kubectl describe pod  pod-name
+12)get logs
+kubectl logs pod-name
+
+13) go inside container 
+kubectl exec -it pod-name -- bin/bash
+
+14) apply - apply  configuration to kubernetes cluster
+kubectl apply -f .\deploy.yml
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
