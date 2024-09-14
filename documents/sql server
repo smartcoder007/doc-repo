@@ -1,4 +1,30 @@
 Debug:
-https://www.youtube.com/watch?v=AlRNA8pmfIk&list=PL08903FB7ACA1C2FB&index=108
+  https://www.youtube.com/watch?v=AlRNA8pmfIk&list=PL08903FB7ACA1C2FB&index=108
 
+Debug a stored proceedure
+  ---------------------------------------
+  Create procedure spPrintEvenNumbers
+  @Target int
+  as
+  Begin
+   Declare @StartNumber int
+   Set @StartNumber = 1
+  
+   while(@StartNumber [ @Target)
+   Begin
+    If(@StartNumber%2 = 0)
+    Begin
+     Print @StartNumber
+    End
+    Set @StartNumber = @StartNumber + 1
+   End
+   Print 'Finished printing even numbers till ' + RTRIM(@Target)
+  End
+--------------------------------------------
+  --  calling  the stored procedure and debug 
+  DECLARE @TargetNumber INT
+  SET @TargetNumber = 10
+  EXECUTE spPrintEvenNumbers @TargetNumber
+  Print 'Done'
 
+--------------------------------------
